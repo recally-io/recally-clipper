@@ -1,8 +1,15 @@
 import { defineConfig } from "wxt";
 
-// See https://wxt.dev/api/config.html
 export default defineConfig({
-	srcDir: "src",
 	extensionApi: "chrome",
 	modules: ["@wxt-dev/module-react"],
+	manifest: {
+		name: "Recally Clipper",
+		description: "Clip web content to Recally",
+		version: "0.0.0",
+		permissions: ["activeTab", "scripting"],
+		action: {
+			default_popup: "popup/index.html",
+		},
+	},
 });

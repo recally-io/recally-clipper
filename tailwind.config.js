@@ -13,6 +13,18 @@ module.exports = {
 	content: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
 	theme: {
 		extend: {
+			animation: {
+				progress: "progress 2s linear infinite",
+			},
+			keyframes: {
+				progress: {
+					"0%": { transform: "translateX(-100%)" },
+					"100%": { transform: "translateX(100%)" },
+				},
+			},
+			fontFamily: {
+				sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+			},
 			colors: {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
