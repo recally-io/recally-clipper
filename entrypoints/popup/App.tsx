@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { AlertCircle, CheckCircle, Loader2, Settings } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { Textarea } from "~/components/ui/textarea";
 
 const PREDEFINED_TAGS = [
 	"Recipe",
@@ -35,7 +35,7 @@ export default function App() {
 
 		try {
 			// Get current tab info
-			const [tab] = await chrome.tabs.query({
+			const [tab] = await browser.tabs.query({
 				active: true,
 				currentWindow: true,
 			});
@@ -49,7 +49,7 @@ export default function App() {
 			setTitle(tab.title || "");
 
 			// Process page content
-			const response = await chrome.tabs.sendMessage(tab.id, {
+			const response = await browser.tabs.sendMessage(tab.id, {
 				type: "process-content",
 			});
 
@@ -127,7 +127,7 @@ export default function App() {
 					</div>
 				</div>
 			)}
-			<div className="container mx-auto rounded-lg shadow-lg m-4">
+			<div className="container mx-auto rounded-lg shadow-lg">
 				<header className="p-4 flex justify-between items-center border-b bg-gray-50">
 					<div className="flex items-center gap-2">
 						<img src="icon/16.png" alt="Recally Logo" className="h-6 w-6" />

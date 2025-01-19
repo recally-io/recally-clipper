@@ -9,7 +9,7 @@ export default defineContentScript({
 		const turndownService = new TurndownService();
 
 		// Listen for messages and return processed content
-		chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+		browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 			if (message.type === "process-content") {
 				try {
 					// Clone document to avoid modifying the original
