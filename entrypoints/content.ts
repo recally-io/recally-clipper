@@ -9,7 +9,7 @@ export default defineContentScript({
 		const turndownService = new TurndownService();
 
 		// Listen for messages and return processed content
-		chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+		browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 			if (message.type === "process-content") {
 				try {
 					// Clone document to avoid modifying the original
@@ -23,9 +23,6 @@ export default defineContentScript({
 
 					// Convert cleaned HTML to Markdown
 					const markdownContent = turndownService.turndown(article.content);
-					console.log(article);
-					const date: Date = new Date(article.publishedTime);
-					console.log(date.toISOString().split("T")[0]);
 					// Send response back to popup
 					sendResponse({
 						success: true,
