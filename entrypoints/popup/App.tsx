@@ -1,17 +1,9 @@
-import { AlertCircle, CheckCircle, Loader2, Settings } from "lucide-react";
+import { AlertCircle, CheckCircle, Loader2, Settings, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
-
-const PREDEFINED_TAGS = [
-	"Recipe",
-	"Article",
-	"Tutorial",
-	"Reference",
-	"Research",
-];
 
 export default function App() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +15,7 @@ export default function App() {
 	const [published, setPublished] = useState("");
 	const [description, setDescription] = useState("");
 	const [tags, setTags] = useState<string[]>([]);
+	const [newTag, setNewTag] = useState("");
 	const [content, setContent] = useState("");
 
 	useEffect(() => {
@@ -286,26 +279,38 @@ export default function App() {
 								{tags.length} selected
 							</span>
 						</div>
-						<div className="flex flex-wrap gap-1">
-							{PREDEFINED_TAGS.map((tag) => (
-								<Button
-									key={tag}
-									variant="default"
-									onClick={() =>
-										setTags((prev) =>
-											prev.includes(tag)
-												? prev.filter((t) => t !== tag)
-												: [...prev, tag],
-										)
+						<div className="flex items-center gap-2">
+							<Input
+								value={newTag}
+								onChange={(e) => setNewTag(e.target.value)}
+								onKeyDown={(e) => {
+									if (e.key === "Enter" && newTag.trim()) {
+										setTags((prev) => [...new Set([...prev, newTag.trim()])]);
+										setNewTag("");
 									}
-									className={`px-2 py-1 text-xs rounded transition-colors ${
-										tags.includes(tag)
-											? "bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-300"
-											: "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
-									}`}
+								}}
+								placeholder="Add a tag..."
+								className="h-7 text-sm dark:bg-gray-800 dark:text-gray-200"
+							/>
+						</div>
+						<div className="flex flex-wrap gap-1">
+							{tags.map((tag) => (
+								<div
+									key={tag}
+									className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded flex items-center gap-1"
 								>
-									{tag}
-								</Button>
+									<span className="text-xs text-gray-700 dark:text-gray-200">
+										{tag}
+									</span>
+									<Button
+										onClick={() =>
+											setTags((prev) => prev.filter((t) => t !== tag))
+										}
+										className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 w-3 h-3 inline-flex items-center justify-center"
+									>
+										<X className="h-2 w-2" />
+									</Button>
+								</div>
 							))}
 						</div>
 					</div>
