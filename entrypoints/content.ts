@@ -23,9 +23,6 @@ export default defineContentScript({
 
 					// Convert cleaned HTML to Markdown
 					const markdownContent = turndownService.turndown(article.content);
-					console.log(article);
-					const date: Date = new Date(article.publishedTime);
-					console.log(date.toISOString().split("T")[0]);
 					// Send response back to popup
 					sendResponse({
 						success: true,

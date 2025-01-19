@@ -4,6 +4,58 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
+import { apiKeyItem, hostItem } from "~/storage/settings";
+
+type Article = {
+	/** article title */
+	title: string;
+
+	/** HTML string of processed article content */
+	content: string;
+
+	/** text content of the article, with all the HTML tags removed */
+	textContent: string;
+
+	/** length of an article, in characters */
+	length: number;
+
+	/** article description, or short excerpt from the content */
+	excerpt: string;
+
+	/** author metadata */
+	byline: string;
+
+	/** content direction */
+	dir: string;
+
+	/** name of the site */
+	siteName: string;
+
+	/** content language */
+	lang: string;
+
+	/** published time */
+	publishedTime: string;
+};
+
+type BookmarkMetadata = {
+	author?: string;
+	published_at?: string;
+	description?: string;
+	sitename?: string;
+
+	image?: string;
+};
+
+type SaveBookmarkRequest = {
+	title: string;
+	url: string;
+	content: string;
+	html: string;
+	description?: string;
+	tags?: string[];
+	metadata?: BookmarkMetadata;
+};
 
 export default function App() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -17,9 +69,22 @@ export default function App() {
 	const [tags, setTags] = useState<string[]>([]);
 	const [newTag, setNewTag] = useState("");
 	const [content, setContent] = useState("");
+	const [settings, setSettings] = useState<{ host: string; apiKey: string }>({
+		host: "",
+		apiKey: "",
+	});
+
+	const [article, setArticle] = useState<Article | null>(null);
+	const [markdownContent, setMarkdownContent] = useState<string | null>(null);
 
 	useEffect(() => {
 		initializePopup();
+		// Load settings
+		Promise.all([hostItem.getValue(), apiKeyItem.getValue()]).then(
+			([host, apiKey]) => {
+				setSettings({ host: host || "", apiKey: apiKey || "" });
+			},
+		);
 	}, []);
 
 	// Update dark mode detection to handle changes
@@ -63,6 +128,9 @@ export default function App() {
 				throw new Error(response.error);
 			}
 
+			setArticle(response.article);
+			setMarkdownContent(response.markdown);
+
 			setContent(response.markdown);
 			setTitle(response.article.title);
 			setDescription(response.article.excerpt);
@@ -82,9 +150,17 @@ export default function App() {
 	};
 
 	const handleSave = async () => {
-		if (!content) {
+		if (!article) {
 			setStatus("error");
 			setErrorMessage("No content to save");
+			return;
+		}
+
+		if (!settings.host || !settings.apiKey) {
+			setStatus("error");
+			setErrorMessage(
+				"Please configure host and API key in extension settings",
+			);
 			return;
 		}
 
@@ -92,27 +168,40 @@ export default function App() {
 		setStatus("idle");
 
 		try {
-			const response = await fetch("https://recally.io/api/v1/bookmarks", {
+			const body: SaveBookmarkRequest = {
+				title: article.title,
+				url: currentUrl,
+				content: markdownContent || "",
+				html: article.content || "",
+				description: article.excerpt,
+				tags: tags,
+				metadata: {
+					author: article.byline,
+					published_at: article.publishedTime,
+					description: article.excerpt,
+					sitename: article.siteName,
+				},
+			};
+
+			const response = await fetch(`${settings.host}/api/v1/bookmarks`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					"X-API-Key": settings.apiKey,
 				},
-				body: JSON.stringify({
-					title,
-					url: currentUrl,
-					author,
-					published_date: published,
-					description,
-					tags,
-					content,
-				}),
+				body: JSON.stringify(body),
 			});
 
 			if (!response.ok) {
-				throw new Error("Failed to save to Recally");
+				const errorMessage = await response.text();
+				throw new Error(`Failed to save to Recally: ${errorMessage}`);
 			}
 
 			setStatus("success");
+			// Close the popup window after a short delay
+			setTimeout(() => {
+				window.close();
+			}, 1000);
 		} catch (error) {
 			setStatus("error");
 			setErrorMessage(
@@ -141,13 +230,13 @@ export default function App() {
 						<img src="icon/16.png" alt="Recally Logo" className="h-5 w-5" />
 						<h1 className="ml-1 text-xl font-bold dark:text-white">Recally</h1>
 					</div>
-					<button
-						type="button"
+					<Button
+						variant="ghost"
 						onClick={() => browser.runtime.openOptionsPage()}
 						className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
 					>
 						<Settings className="h-4 w-4" />
-					</button>
+					</Button>
 				</header>
 				{(status === "success" || status === "error") && (
 					<div
@@ -175,13 +264,12 @@ export default function App() {
 									: errorMessage}
 							</span>
 						</div>
-						<button
-							type="button"
+						<Button
 							onClick={() => setStatus("idle")}
 							className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
 						>
-							×
-						</button>
+							<X className="h-4 w-4" />
+						</Button>
 					</div>
 				)}
 				<div className="p-2 space-y-3">
