@@ -131,45 +131,43 @@ export default function App() {
 	};
 
 	return (
-		<div className="w-[400px] min-h-[600px] relative dark:bg-gray-900">
+		<div className="w-[400px] min-h-[500px] relative dark:bg-gray-900">
 			{isLoading && (
 				<div className="absolute inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-50">
-					<div className="flex flex-col items-center gap-3">
-						<Loader2 className="h-8 w-8 animate-spin text-gray-800 dark:text-gray-200" />
-						<p className="text-sm font-medium text-gray-800 dark:text-gray-200">
+					<div className="flex flex-col items-center gap-2">
+						<Loader2 className="h-6 w-6 animate-spin text-gray-800 dark:text-gray-200" />
+						<p className="text-xs font-medium text-gray-800 dark:text-gray-200">
 							Processing...
 						</p>
 					</div>
 				</div>
 			)}
-			<div className="container mx-auto rounded-lg shadow-lg pb-16">
-				<header className="p-4 flex justify-between items-center border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-					<div className="flex items-center gap-2">
-						<img src="icon/16.png" alt="Recally Logo" className="h-6 w-6" />
-						<h1 className="ml-2 text-3xl font-extrabold dark:text-white">
-							Recally
-						</h1>
+			<div className="container mx-auto rounded-lg shadow-lg pb-12">
+				<header className="p-2 flex justify-between items-center border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+					<div className="flex items-center gap-1">
+						<img src="icon/16.png" alt="Recally Logo" className="h-5 w-5" />
+						<h1 className="ml-1 text-xl font-bold dark:text-white">Recally</h1>
 					</div>
 					<button
 						type="button"
 						className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
 					>
-						<Settings className="h-5 w-5" />
+						<Settings className="h-4 w-4" />
 					</button>
 				</header>
 				{(status === "success" || status === "error") && (
 					<div
-						className={`mx-4 mt-4 p-4 rounded-lg flex items-center justify-between ${
+						className={`mx-2 mt-2 p-2 rounded text-xs flex items-center justify-between ${
 							status === "success"
 								? "bg-green-100 dark:bg-green-900/30"
 								: "bg-red-100 dark:bg-red-900/30"
 						}`}
 					>
-						<div className="flex items-center gap-2">
+						<div className="flex items-center gap-1">
 							{status === "success" ? (
-								<CheckCircle className="h-5 w-5 text-green-600" />
+								<CheckCircle className="h-4 w-4 text-green-600" />
 							) : (
-								<AlertCircle className="h-5 w-5 text-red-600" />
+								<AlertCircle className="h-4 w-4 text-red-600" />
 							)}
 							<span
 								className={
@@ -192,95 +190,103 @@ export default function App() {
 						</button>
 					</div>
 				)}
-				<div className="p-4 space-y-6">
+				<div className="p-2 space-y-3">
 					{/* Article Details */}
-					<div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 space-y-4">
-						<h2 className="font-semibold text-gray-700 dark:text-gray-200">
+					<div className="bg-white dark:bg-gray-800 p-2 rounded-lg border dark:border-gray-700 space-y-2">
+						<h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
 							Article Details
 						</h2>
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid grid-cols-2 gap-2">
 							<div className="col-span-2">
-								<Label htmlFor="title">Title</Label>
+								<Label htmlFor="title" className="text-xs">
+									Title
+								</Label>
 								<Input
 									id="title"
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
-									className="mt-1 dark:bg-gray-800 dark:text-gray-200"
+									className="mt-0.5 h-7 text-sm dark:bg-gray-800 dark:text-gray-200"
 								/>
 							</div>
 							<div className="col-span-2">
-								<Label htmlFor="source">Source</Label>
+								<Label htmlFor="source" className="text-xs">
+									Source
+								</Label>
 								<Input
 									id="source"
 									value={currentUrl}
 									readOnly
-									className="mt-1 bg-gray-50 dark:bg-gray-700"
+									className="mt-0.5 h-7 text-sm bg-gray-50 dark:bg-gray-700"
 								/>
 							</div>
 							<div>
-								<Label htmlFor="author">Author</Label>
+								<Label htmlFor="author" className="text-xs">
+									Author
+								</Label>
 								<Input
 									id="author"
 									value={author}
 									onChange={(e) => setAuthor(e.target.value)}
-									className="mt-1 dark:bg-gray-800 dark:text-gray-200"
+									className="mt-0.5 h-7 text-sm dark:bg-gray-800 dark:text-gray-200"
 								/>
 							</div>
 							<div>
-								<Label htmlFor="published">Published</Label>
+								<Label htmlFor="published" className="text-xs">
+									Published
+								</Label>
 								<Input
 									id="published"
 									type="date"
 									value={published}
 									onChange={(e) => setPublished(e.target.value)}
-									className="mt-1 dark:bg-gray-800 dark:text-gray-200"
+									className="mt-0.5 h-7 text-sm dark:bg-gray-800 dark:text-gray-200"
 								/>
 							</div>
 						</div>
 					</div>
 
 					{/* Content Section */}
-					<div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 space-y-4">
-						<h2 className="font-semibold text-gray-700 dark:text-gray-200">
+					<div className="bg-white dark:bg-gray-800 p-2 rounded-lg border dark:border-gray-700 space-y-2">
+						<h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
 							Content
 						</h2>
-						<div className="space-y-4">
+						<div className="space-y-2">
 							<div>
-								<Label htmlFor="description">Description</Label>
+								<Label htmlFor="description" className="text-xs">
+									Description
+								</Label>
 								<Textarea
 									id="description"
 									value={description}
 									onChange={(e) => setDescription(e.target.value)}
-									className="mt-1 dark:bg-gray-800 dark:text-gray-200"
-									rows={3}
+									className="mt-0.5 text-sm min-h-[60px] dark:bg-gray-800 dark:text-gray-200"
+									rows={2}
 								/>
 							</div>
 							<div>
-								<Label>Content Preview</Label>
-								<div className="mt-1">
-									<Textarea
-										id="content"
-										value={content}
-										onChange={(e) => setContent(e.target.value)}
-										rows={8}
-										className="w-full dark:bg-gray-800 dark:text-gray-200"
-									/>
-								</div>
+								<Label className="text-xs">Content Preview</Label>
+								<Textarea
+									id="content"
+									value={content}
+									onChange={(e) => setContent(e.target.value)}
+									rows={6}
+									className="mt-0.5 text-sm dark:bg-gray-800 dark:text-gray-200"
+								/>
 							</div>
 						</div>
 					</div>
 
 					{/* Tags Section */}
-					<div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 space-y-4">
+					<div className="bg-white dark:bg-gray-800 p-2 rounded-lg border dark:border-gray-700 space-y-2">
 						<div className="flex justify-between items-center">
-							<h2 className="font-semibold text-gray-700 dark:text-gray-200">
+							<h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
 								Tags
 							</h2>
-							<span className="text-sm text-gray-500 dark:text-gray-400">
+							<span className="text-xs text-gray-500 dark:text-gray-400">
 								{tags.length} selected
 							</span>
 						</div>
-						<div className="flex flex-wrap gap-2">
+						<div className="flex flex-wrap gap-1">
 							{PREDEFINED_TAGS.map((tag) => (
 								<Button
 									key={tag}
@@ -292,7 +298,7 @@ export default function App() {
 												: [...prev, tag],
 										)
 									}
-									className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+									className={`px-2 py-1 text-xs rounded transition-colors ${
 										tags.includes(tag)
 											? "bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-300"
 											: "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
@@ -307,15 +313,15 @@ export default function App() {
 			</div>
 
 			{/* Fixed Save Button */}
-			<div className="fixed bottom-0 left-0 right-0 p-4 bg-white dark:bg-gray-900 border-t dark:border-gray-700 shadow-lg">
+			<div className="fixed bottom-0 left-0 right-0 p-2 bg-white dark:bg-gray-900 border-t dark:border-gray-700 shadow-lg">
 				<Button
-					className="w-full h-12 text-base font-medium"
+					className="w-full h-8 text-sm font-medium"
 					onClick={handleSave}
 					disabled={isLoading}
 				>
 					{isLoading ? (
 						<>
-							<Loader2 className="mr-2 h-5 w-5 animate-spin" />
+							<Loader2 className="mr-1 h-4 w-4 animate-spin" />
 							Saving Content...
 						</>
 					) : (
