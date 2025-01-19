@@ -142,7 +142,7 @@ export default function App() {
 					</div>
 				</div>
 			)}
-			<div className="container mx-auto rounded-lg shadow-lg">
+			<div className="container mx-auto rounded-lg shadow-lg pb-16">
 				<header className="p-4 flex justify-between items-center border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
 					<div className="flex items-center gap-2">
 						<img src="icon/16.png" alt="Recally Logo" className="h-6 w-6" />
@@ -157,7 +157,6 @@ export default function App() {
 						<Settings className="h-5 w-5" />
 					</button>
 				</header>
-
 				{(status === "success" || status === "error") && (
 					<div
 						className={`mx-4 mt-4 p-4 rounded-lg flex items-center justify-between ${
@@ -193,7 +192,6 @@ export default function App() {
 						</button>
 					</div>
 				)}
-
 				<div className="p-4 space-y-6">
 					{/* Article Details */}
 					<div className="bg-white dark:bg-gray-800 p-4 rounded-lg border dark:border-gray-700 space-y-4">
@@ -305,23 +303,25 @@ export default function App() {
 							))}
 						</div>
 					</div>
-
-					{/* Save Button */}
-					<Button
-						className="w-full h-12 text-base font-medium "
-						onClick={handleSave}
-						disabled={isLoading}
-					>
-						{isLoading ? (
-							<>
-								<Loader2 className="mr-2 h-5 w-5 animate-spin" />
-								Saving Content...
-							</>
-						) : (
-							"Save to Recally"
-						)}
-					</Button>
 				</div>
+			</div>
+
+			{/* Fixed Save Button */}
+			<div className="fixed bottom-0 left-0 right-0 p-4 bg-white dark:bg-gray-900 border-t dark:border-gray-700 shadow-lg">
+				<Button
+					className="w-full h-12 text-base font-medium"
+					onClick={handleSave}
+					disabled={isLoading}
+				>
+					{isLoading ? (
+						<>
+							<Loader2 className="mr-2 h-5 w-5 animate-spin" />
+							Saving Content...
+						</>
+					) : (
+						"Save to Recally"
+					)}
+				</Button>
 			</div>
 		</div>
 	);
