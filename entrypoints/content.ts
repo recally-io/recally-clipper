@@ -1,6 +1,6 @@
-import { defineContentScript } from "wxt/sandbox";
 import { Readability } from "@mozilla/readability";
 import TurndownService from "turndown";
+import { defineContentScript } from "wxt/sandbox";
 
 export default defineContentScript({
 	matches: ["<all_urls>"],
@@ -8,45 +8,37 @@ export default defineContentScript({
 		// Initialize Turndown with default options
 		const turndownService = new TurndownService();
 
-		// Function to extract and process content
-		function processPageContent() {
-			try {
-				// Clone document to avoid modifying the original
-				const documentClone = document.cloneNode(true) as Document;
-
-				// Use Readability to parse and extract content
-				const reader = new Readability(documentClone);
-				const article = reader.parse();
-
-				if (!article) {
-					throw new Error("Failed to extract article content");
-				}
-
-				// Convert cleaned HTML to Markdown
-				const markdownContent = turndownService.turndown(article.content);
-
-				// Send content to background script for API submission
-				chrome.runtime.sendMessage({
-					type: "content-processed",
-					data: {
-						title: article.title,
-						content: markdownContent,
-						url: window.location.href,
-					},
-				});
-			} catch (error) {
-				console.error("Error processing page content:", error);
-				chrome.runtime.sendMessage({
-					type: "content-error",
-					error: error instanceof Error ? error.message : "Unknown error",
-				});
-			}
-		}
-
-		// Listen for messages from background script
-		chrome.runtime.onMessage.addListener((message) => {
+		// Listen for messages and return processed content
+		chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 			if (message.type === "process-content") {
-				processPageContent();
+				try {
+					// Clone document to avoid modifying the original
+					const documentClone = document.cloneNode(true) as Document;
+					const reader = new Readability(documentClone);
+					const article = reader.parse();
+
+					if (!article) {
+						throw new Error("Failed to extract article content");
+					}
+
+					// Convert cleaned HTML to Markdown
+					const markdownContent = turndownService.turndown(article.content);
+					console.log(article);
+					const date: Date = new Date(article.publishedTime);
+					console.log(date.toISOString().split("T")[0]);
+					// Send response back to popup
+					sendResponse({
+						success: true,
+						article: article,
+						markdown: markdownContent,
+					});
+				} catch (error) {
+					sendResponse({
+						success: false,
+						error: error instanceof Error ? error.message : "Unknown error",
+					});
+				}
+				return true; // Required for async response
 			}
 		});
 	},
