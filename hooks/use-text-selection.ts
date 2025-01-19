@@ -1,5 +1,5 @@
-import { useState, useEffect, RefObject } from "react";
-import { type Position } from "~/types";
+import { useState, useEffect, type RefObject } from "react";
+import type { Position } from "~/types";
 
 interface UseTextSelectionProps {
 	menuRef: RefObject<HTMLDivElement | null>;
