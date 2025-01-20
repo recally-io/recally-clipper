@@ -2,7 +2,7 @@
 	"name": "recally-clipper",
 	"description": "manifest.json description",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"type": "module",
 	"scripts": {
 		"lint": "biome format --write",
@@ -13,7 +13,8 @@
 		"zip": "wxt zip",
 		"zip:firefox": "wxt zip -b firefox",
 		"compile": "tsc --noEmit",
-		"postinstall": "wxt prepare"
+		"postinstall": "wxt prepare",
+		"build:safari": "xcrun /Applications/Xcode.app/Contents/Developer/usr/bin/safari-web-extension-converter .output/chrome-mv3 --project-location xcode/"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.1",

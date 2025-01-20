@@ -1,0 +1,967 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FF5A79DC2D3E1BCE000A95BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A79DB2D3E1BCE000A95BC /* AppDelegate.swift */; };
+		FF5A79DE2D3E1BCE000A95BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A79DD2D3E1BCE000A95BC /* SceneDelegate.swift */; };
+		FF5A79E12D3E1BCE000A95BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79DF2D3E1BCE000A95BC /* LaunchScreen.storyboard */; };
+		FF5A79E42D3E1BCE000A95BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79E22D3E1BCE000A95BC /* Main.storyboard */; };
+		FF5A79ED2D3E1BCE000A95BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A79EC2D3E1BCE000A95BC /* AppDelegate.swift */; };
+		FF5A79F02D3E1BCE000A95BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79EE2D3E1BCE000A95BC /* Main.storyboard */; };
+		FF5A79F82D3E1BCE000A95BC /* Recally Clipper Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FF5A79F72D3E1BCE000A95BC /* Recally Clipper Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FF5A7A022D3E1BCE000A95BC /* Recally Clipper Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FF5A7A012D3E1BCE000A95BC /* Recally Clipper Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FF5A7A082D3E1BCE000A95BC /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CB2D3E1BCE000A95BC /* Main.html */; };
+		FF5A7A092D3E1BCE000A95BC /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CB2D3E1BCE000A95BC /* Main.html */; };
+		FF5A7A0A2D3E1BCE000A95BC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CD2D3E1BCE000A95BC /* Icon.png */; };
+		FF5A7A0B2D3E1BCE000A95BC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CD2D3E1BCE000A95BC /* Icon.png */; };
+		FF5A7A0C2D3E1BCE000A95BC /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CE2D3E1BCE000A95BC /* Style.css */; };
+		FF5A7A0D2D3E1BCE000A95BC /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CE2D3E1BCE000A95BC /* Style.css */; };
+		FF5A7A0E2D3E1BCE000A95BC /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CF2D3E1BCE000A95BC /* Script.js */; };
+		FF5A7A0F2D3E1BCE000A95BC /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79CF2D3E1BCE000A95BC /* Script.js */; };
+		FF5A7A102D3E1BCE000A95BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A79D02D3E1BCE000A95BC /* ViewController.swift */; };
+		FF5A7A112D3E1BCE000A95BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A79D02D3E1BCE000A95BC /* ViewController.swift */; };
+		FF5A7A122D3E1BCE000A95BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79D12D3E1BCE000A95BC /* Assets.xcassets */; };
+		FF5A7A132D3E1BCE000A95BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF5A79D12D3E1BCE000A95BC /* Assets.xcassets */; };
+		FF5A7A142D3E1BCE000A95BC /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A79D32D3E1BCE000A95BC /* SafariWebExtensionHandler.swift */; };
+		FF5A7A152D3E1BCE000A95BC /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF5A79D32D3E1BCE000A95BC /* SafariWebExtensionHandler.swift */; };
+		FF5A7A2E2D3E1BCF000A95BC /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A272D3E1BCF000A95BC /* popup.html */; };
+		FF5A7A2F2D3E1BCF000A95BC /* chunks in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A282D3E1BCF000A95BC /* chunks */; };
+		FF5A7A302D3E1BCF000A95BC /* content-scripts in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A292D3E1BCF000A95BC /* content-scripts */; };
+		FF5A7A312D3E1BCF000A95BC /* icons in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2A2D3E1BCF000A95BC /* icons */; };
+		FF5A7A322D3E1BCF000A95BC /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2B2D3E1BCF000A95BC /* manifest.json */; };
+		FF5A7A332D3E1BCF000A95BC /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2C2D3E1BCF000A95BC /* options.html */; };
+		FF5A7A342D3E1BCF000A95BC /* assets in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2D2D3E1BCF000A95BC /* assets */; };
+		FF5A7A352D3E1BCF000A95BC /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A272D3E1BCF000A95BC /* popup.html */; };
+		FF5A7A362D3E1BCF000A95BC /* chunks in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A282D3E1BCF000A95BC /* chunks */; };
+		FF5A7A372D3E1BCF000A95BC /* content-scripts in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A292D3E1BCF000A95BC /* content-scripts */; };
+		FF5A7A382D3E1BCF000A95BC /* icons in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2A2D3E1BCF000A95BC /* icons */; };
+		FF5A7A392D3E1BCF000A95BC /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2B2D3E1BCF000A95BC /* manifest.json */; };
+		FF5A7A3A2D3E1BCF000A95BC /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2C2D3E1BCF000A95BC /* options.html */; };
+		FF5A7A3B2D3E1BCF000A95BC /* assets in Resources */ = {isa = PBXBuildFile; fileRef = FF5A7A2D2D3E1BCF000A95BC /* assets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FF5A79F92D3E1BCE000A95BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF5A79C52D3E1BCD000A95BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF5A79F62D3E1BCE000A95BC;
+			remoteInfo = "Recally Clipper Extension (iOS)";
+		};
+		FF5A7A032D3E1BCE000A95BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FF5A79C52D3E1BCD000A95BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF5A7A002D3E1BCE000A95BC;
+			remoteInfo = "Recally Clipper Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FF5A7A1B2D3E1BCE000A95BC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FF5A79F82D3E1BCE000A95BC /* Recally Clipper Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A7A222D3E1BCE000A95BC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FF5A7A022D3E1BCE000A95BC /* Recally Clipper Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FF5A79CC2D3E1BCE000A95BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		FF5A79CD2D3E1BCE000A95BC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		FF5A79CE2D3E1BCE000A95BC /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		FF5A79CF2D3E1BCE000A95BC /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		FF5A79D02D3E1BCE000A95BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FF5A79D12D3E1BCE000A95BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF5A79D32D3E1BCE000A95BC /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		FF5A79D82D3E1BCE000A95BC /* Recally Clipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recally Clipper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF5A79DB2D3E1BCE000A95BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FF5A79DD2D3E1BCE000A95BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FF5A79E02D3E1BCE000A95BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FF5A79E32D3E1BCE000A95BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FF5A79E52D3E1BCE000A95BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF5A79EA2D3E1BCE000A95BC /* Recally Clipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recally Clipper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF5A79EC2D3E1BCE000A95BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FF5A79EF2D3E1BCE000A95BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FF5A79F12D3E1BCE000A95BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF5A79F22D3E1BCE000A95BC /* Recally Clipper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Recally Clipper.entitlements"; sourceTree = "<group>"; };
+		FF5A79F72D3E1BCE000A95BC /* Recally Clipper Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Recally Clipper Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF5A79FC2D3E1BCE000A95BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF5A7A012D3E1BCE000A95BC /* Recally Clipper Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Recally Clipper Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF5A7A062D3E1BCE000A95BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF5A7A072D3E1BCE000A95BC /* Recally Clipper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Recally Clipper.entitlements"; sourceTree = "<group>"; };
+		FF5A7A272D3E1BCF000A95BC /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = "../../../.output/chrome-mv3/popup.html"; sourceTree = "<group>"; };
+		FF5A7A282D3E1BCF000A95BC /* chunks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = chunks; path = "../../../.output/chrome-mv3/chunks"; sourceTree = "<group>"; };
+		FF5A7A292D3E1BCF000A95BC /* content-scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "content-scripts"; path = "../../../.output/chrome-mv3/content-scripts"; sourceTree = "<group>"; };
+		FF5A7A2A2D3E1BCF000A95BC /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = "../../../.output/chrome-mv3/icons"; sourceTree = "<group>"; };
+		FF5A7A2B2D3E1BCF000A95BC /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = "../../../.output/chrome-mv3/manifest.json"; sourceTree = "<group>"; };
+		FF5A7A2C2D3E1BCF000A95BC /* options.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = options.html; path = "../../../.output/chrome-mv3/options.html"; sourceTree = "<group>"; };
+		FF5A7A2D2D3E1BCF000A95BC /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = "../../../.output/chrome-mv3/assets"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FF5A79D52D3E1BCE000A95BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79E72D3E1BCE000A95BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79F42D3E1BCE000A95BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79FE2D3E1BCE000A95BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FF5A79C42D3E1BCD000A95BC = {
+			isa = PBXGroup;
+			children = (
+				FF5A79C92D3E1BCE000A95BC /* Shared (App) */,
+				FF5A79D22D3E1BCE000A95BC /* Shared (Extension) */,
+				FF5A79DA2D3E1BCE000A95BC /* iOS (App) */,
+				FF5A79EB2D3E1BCE000A95BC /* macOS (App) */,
+				FF5A79FB2D3E1BCE000A95BC /* iOS (Extension) */,
+				FF5A7A052D3E1BCE000A95BC /* macOS (Extension) */,
+				FF5A79D92D3E1BCE000A95BC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FF5A79C92D3E1BCE000A95BC /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A79D02D3E1BCE000A95BC /* ViewController.swift */,
+				FF5A79D12D3E1BCE000A95BC /* Assets.xcassets */,
+				FF5A79CA2D3E1BCE000A95BC /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		FF5A79CA2D3E1BCE000A95BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A79CB2D3E1BCE000A95BC /* Main.html */,
+				FF5A79CD2D3E1BCE000A95BC /* Icon.png */,
+				FF5A79CE2D3E1BCE000A95BC /* Style.css */,
+				FF5A79CF2D3E1BCE000A95BC /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FF5A79D22D3E1BCE000A95BC /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A7A262D3E1BCF000A95BC /* Resources */,
+				FF5A79D32D3E1BCE000A95BC /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		FF5A79D92D3E1BCE000A95BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A79D82D3E1BCE000A95BC /* Recally Clipper.app */,
+				FF5A79EA2D3E1BCE000A95BC /* Recally Clipper.app */,
+				FF5A79F72D3E1BCE000A95BC /* Recally Clipper Extension.appex */,
+				FF5A7A012D3E1BCE000A95BC /* Recally Clipper Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF5A79DA2D3E1BCE000A95BC /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A79DB2D3E1BCE000A95BC /* AppDelegate.swift */,
+				FF5A79DD2D3E1BCE000A95BC /* SceneDelegate.swift */,
+				FF5A79DF2D3E1BCE000A95BC /* LaunchScreen.storyboard */,
+				FF5A79E22D3E1BCE000A95BC /* Main.storyboard */,
+				FF5A79E52D3E1BCE000A95BC /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		FF5A79EB2D3E1BCE000A95BC /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A79EC2D3E1BCE000A95BC /* AppDelegate.swift */,
+				FF5A79EE2D3E1BCE000A95BC /* Main.storyboard */,
+				FF5A79F12D3E1BCE000A95BC /* Info.plist */,
+				FF5A79F22D3E1BCE000A95BC /* Recally Clipper.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		FF5A79FB2D3E1BCE000A95BC /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A79FC2D3E1BCE000A95BC /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		FF5A7A052D3E1BCE000A95BC /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A7A062D3E1BCE000A95BC /* Info.plist */,
+				FF5A7A072D3E1BCE000A95BC /* Recally Clipper.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		FF5A7A262D3E1BCF000A95BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FF5A7A272D3E1BCF000A95BC /* popup.html */,
+				FF5A7A282D3E1BCF000A95BC /* chunks */,
+				FF5A7A292D3E1BCF000A95BC /* content-scripts */,
+				FF5A7A2A2D3E1BCF000A95BC /* icons */,
+				FF5A7A2B2D3E1BCF000A95BC /* manifest.json */,
+				FF5A7A2C2D3E1BCF000A95BC /* options.html */,
+				FF5A7A2D2D3E1BCF000A95BC /* assets */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF5A79D72D3E1BCE000A95BC /* Recally Clipper (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF5A7A1C2D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper (iOS)" */;
+			buildPhases = (
+				FF5A79D42D3E1BCE000A95BC /* Sources */,
+				FF5A79D52D3E1BCE000A95BC /* Frameworks */,
+				FF5A79D62D3E1BCE000A95BC /* Resources */,
+				FF5A7A1B2D3E1BCE000A95BC /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF5A79FA2D3E1BCE000A95BC /* PBXTargetDependency */,
+			);
+			name = "Recally Clipper (iOS)";
+			packageProductDependencies = (
+			);
+			productName = "Recally Clipper (iOS)";
+			productReference = FF5A79D82D3E1BCE000A95BC /* Recally Clipper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FF5A79E92D3E1BCE000A95BC /* Recally Clipper (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF5A7A232D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper (macOS)" */;
+			buildPhases = (
+				FF5A79E62D3E1BCE000A95BC /* Sources */,
+				FF5A79E72D3E1BCE000A95BC /* Frameworks */,
+				FF5A79E82D3E1BCE000A95BC /* Resources */,
+				FF5A7A222D3E1BCE000A95BC /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FF5A7A042D3E1BCE000A95BC /* PBXTargetDependency */,
+			);
+			name = "Recally Clipper (macOS)";
+			packageProductDependencies = (
+			);
+			productName = "Recally Clipper (macOS)";
+			productReference = FF5A79EA2D3E1BCE000A95BC /* Recally Clipper.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FF5A79F62D3E1BCE000A95BC /* Recally Clipper Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF5A7A182D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper Extension (iOS)" */;
+			buildPhases = (
+				FF5A79F32D3E1BCE000A95BC /* Sources */,
+				FF5A79F42D3E1BCE000A95BC /* Frameworks */,
+				FF5A79F52D3E1BCE000A95BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Recally Clipper Extension (iOS)";
+			packageProductDependencies = (
+			);
+			productName = "Recally Clipper Extension (iOS)";
+			productReference = FF5A79F72D3E1BCE000A95BC /* Recally Clipper Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		FF5A7A002D3E1BCE000A95BC /* Recally Clipper Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF5A7A1F2D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper Extension (macOS)" */;
+			buildPhases = (
+				FF5A79FD2D3E1BCE000A95BC /* Sources */,
+				FF5A79FE2D3E1BCE000A95BC /* Frameworks */,
+				FF5A79FF2D3E1BCE000A95BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Recally Clipper Extension (macOS)";
+			packageProductDependencies = (
+			);
+			productName = "Recally Clipper Extension (macOS)";
+			productReference = FF5A7A012D3E1BCE000A95BC /* Recally Clipper Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FF5A79C52D3E1BCD000A95BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					FF5A79D72D3E1BCE000A95BC = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					FF5A79E92D3E1BCE000A95BC = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					FF5A79F62D3E1BCE000A95BC = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					FF5A7A002D3E1BCE000A95BC = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = FF5A79C82D3E1BCD000A95BC /* Build configuration list for PBXProject "Recally Clipper" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FF5A79C42D3E1BCD000A95BC;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FF5A79D92D3E1BCE000A95BC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FF5A79D72D3E1BCE000A95BC /* Recally Clipper (iOS) */,
+				FF5A79E92D3E1BCE000A95BC /* Recally Clipper (macOS) */,
+				FF5A79F62D3E1BCE000A95BC /* Recally Clipper Extension (iOS) */,
+				FF5A7A002D3E1BCE000A95BC /* Recally Clipper Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FF5A79D62D3E1BCE000A95BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A0A2D3E1BCE000A95BC /* Icon.png in Resources */,
+				FF5A79E12D3E1BCE000A95BC /* LaunchScreen.storyboard in Resources */,
+				FF5A7A082D3E1BCE000A95BC /* Main.html in Resources */,
+				FF5A7A0E2D3E1BCE000A95BC /* Script.js in Resources */,
+				FF5A7A122D3E1BCE000A95BC /* Assets.xcassets in Resources */,
+				FF5A79E42D3E1BCE000A95BC /* Main.storyboard in Resources */,
+				FF5A7A0C2D3E1BCE000A95BC /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79E82D3E1BCE000A95BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A0B2D3E1BCE000A95BC /* Icon.png in Resources */,
+				FF5A7A0D2D3E1BCE000A95BC /* Style.css in Resources */,
+				FF5A79F02D3E1BCE000A95BC /* Main.storyboard in Resources */,
+				FF5A7A0F2D3E1BCE000A95BC /* Script.js in Resources */,
+				FF5A7A132D3E1BCE000A95BC /* Assets.xcassets in Resources */,
+				FF5A7A092D3E1BCE000A95BC /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79F52D3E1BCE000A95BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A362D3E1BCF000A95BC /* chunks in Resources */,
+				FF5A7A382D3E1BCF000A95BC /* icons in Resources */,
+				FF5A7A3B2D3E1BCF000A95BC /* assets in Resources */,
+				FF5A7A392D3E1BCF000A95BC /* manifest.json in Resources */,
+				FF5A7A372D3E1BCF000A95BC /* content-scripts in Resources */,
+				FF5A7A352D3E1BCF000A95BC /* popup.html in Resources */,
+				FF5A7A3A2D3E1BCF000A95BC /* options.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79FF2D3E1BCE000A95BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A2F2D3E1BCF000A95BC /* chunks in Resources */,
+				FF5A7A312D3E1BCF000A95BC /* icons in Resources */,
+				FF5A7A342D3E1BCF000A95BC /* assets in Resources */,
+				FF5A7A322D3E1BCF000A95BC /* manifest.json in Resources */,
+				FF5A7A302D3E1BCF000A95BC /* content-scripts in Resources */,
+				FF5A7A2E2D3E1BCF000A95BC /* popup.html in Resources */,
+				FF5A7A332D3E1BCF000A95BC /* options.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FF5A79D42D3E1BCE000A95BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A102D3E1BCE000A95BC /* ViewController.swift in Sources */,
+				FF5A79DC2D3E1BCE000A95BC /* AppDelegate.swift in Sources */,
+				FF5A79DE2D3E1BCE000A95BC /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79E62D3E1BCE000A95BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A112D3E1BCE000A95BC /* ViewController.swift in Sources */,
+				FF5A79ED2D3E1BCE000A95BC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79F32D3E1BCE000A95BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A142D3E1BCE000A95BC /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5A79FD2D3E1BCE000A95BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5A7A152D3E1BCE000A95BC /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FF5A79FA2D3E1BCE000A95BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF5A79F62D3E1BCE000A95BC /* Recally Clipper Extension (iOS) */;
+			targetProxy = FF5A79F92D3E1BCE000A95BC /* PBXContainerItemProxy */;
+		};
+		FF5A7A042D3E1BCE000A95BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF5A7A002D3E1BCE000A95BC /* Recally Clipper Extension (macOS) */;
+			targetProxy = FF5A7A032D3E1BCE000A95BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FF5A79CB2D3E1BCE000A95BC /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF5A79CC2D3E1BCE000A95BC /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		FF5A79DF2D3E1BCE000A95BC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF5A79E02D3E1BCE000A95BC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FF5A79E22D3E1BCE000A95BC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF5A79E32D3E1BCE000A95BC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FF5A79EE2D3E1BCE000A95BC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FF5A79EF2D3E1BCE000A95BC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FF5A7A162D3E1BCE000A95BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FF5A7A172D3E1BCE000A95BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		FF5A7A192D3E1BCE000A95BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper.Extension";
+				PRODUCT_NAME = "Recally Clipper Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF5A7A1A2D3E1BCE000A95BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper.Extension";
+				PRODUCT_NAME = "Recally Clipper Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF5A7A1D2D3E1BCE000A95BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper";
+				PRODUCT_NAME = "Recally Clipper";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FF5A7A1E2D3E1BCE000A95BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper";
+				PRODUCT_NAME = "Recally Clipper";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF5A7A202D3E1BCE000A95BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Recally Clipper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper.Extension";
+				PRODUCT_NAME = "Recally Clipper Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FF5A7A212D3E1BCE000A95BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Recally Clipper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper.Extension";
+				PRODUCT_NAME = "Recally Clipper Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FF5A7A242D3E1BCE000A95BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Recally Clipper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper";
+				PRODUCT_NAME = "Recally Clipper";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FF5A7A252D3E1BCE000A95BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Recally Clipper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Recally Clipper";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourCompany.Recally-Clipper";
+				PRODUCT_NAME = "Recally Clipper";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FF5A79C82D3E1BCD000A95BC /* Build configuration list for PBXProject "Recally Clipper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF5A7A162D3E1BCE000A95BC /* Debug */,
+				FF5A7A172D3E1BCE000A95BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF5A7A182D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF5A7A192D3E1BCE000A95BC /* Debug */,
+				FF5A7A1A2D3E1BCE000A95BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF5A7A1C2D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF5A7A1D2D3E1BCE000A95BC /* Debug */,
+				FF5A7A1E2D3E1BCE000A95BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF5A7A1F2D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF5A7A202D3E1BCE000A95BC /* Debug */,
+				FF5A7A212D3E1BCE000A95BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FF5A7A232D3E1BCE000A95BC /* Build configuration list for PBXNativeTarget "Recally Clipper (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF5A7A242D3E1BCE000A95BC /* Debug */,
+				FF5A7A252D3E1BCE000A95BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FF5A79C52D3E1BCD000A95BC /* Project object */;
+}
