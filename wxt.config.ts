@@ -8,7 +8,10 @@ export default defineConfig({
 		name: "Recally Clipper",
 		description: "Clip web content to Recally",
 		// default_locale: "en",
-		permissions: ["storage", "activeTab", "scripting"],
+		permissions: ["storage", "activeTab", "tabs", "scripting"],
 		host_permissions: ["https://*/*", "http://*/*"],
+		browser_action: {
+      default_popup: 'popup.html'
+    }
 	},
 });
