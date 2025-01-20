@@ -29,7 +29,7 @@ jobs:
         run: bun run zip:firefox
 
       - name: Create Release
-        uses: softprops/action-gh-release@v4
+        uses: softprops/action-gh-release@v2
         with:
           files: |
             .output/*.zip
