@@ -2,7 +2,7 @@
 	"name": "wxt-react-starter",
 	"description": "manifest.json description",
 	"private": true,
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"lint": "biome format --write",
@@ -40,6 +40,7 @@
 		"@types/chrome": "^0.0.280",
 		"@types/react": "^19.0.1",
 		"@types/react-dom": "^19.0.2",
+		"@wxt-dev/auto-icons": "^1.0.2",
 		"@wxt-dev/module-react": "^1.1.2",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.4.49",

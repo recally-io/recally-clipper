@@ -1,4 +1,4 @@
-import { APIRequest, APIResponse } from "~/types";
+import type { APIRequest, APIResponse } from "~/types";
 
 export async function sendMessageToBackground(
 	message: APIRequest,

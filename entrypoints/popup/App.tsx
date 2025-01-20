@@ -6,6 +6,8 @@ import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { apiKeyItem, hostItem } from "~/storage/settings";
 
+import iconUrl from "~/assets/icon.png";
+
 type Article = {
 	/** article title */
 	title: string;
@@ -227,7 +229,7 @@ export default function App() {
 			<div className="container mx-auto rounded-lg shadow-lg pb-12">
 				<header className="p-2 flex justify-between items-center border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
 					<div className="flex items-center gap-1">
-						<img src="icon/16.png" alt="Recally Logo" className="h-5 w-5" />
+						<img src={iconUrl} alt="Recally Logo" className="h-5 w-5" />
 						<h1 className="ml-1 text-xl font-bold dark:text-white">Recally</h1>
 					</div>
 					<Button
