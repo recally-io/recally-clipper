@@ -11,7 +11,7 @@ export default defineConfig({
 		permissions: ["storage", "activeTab", "tabs", "scripting"],
 		host_permissions: ["https://*/*", "http://*/*"],
 		browser_action: {
-      default_popup: 'popup.html'
-    }
+			default_popup: "popup.html",
+		},
 	},
 });
