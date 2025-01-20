@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { storage } from "wxt/storage";
-import type { Settings } from "~/types";
-import { defaultSettings } from "~/types";
+import { type Settings, defaultSettings } from "~/utils/types";
 
 export function useSettings() {
 	const [settings, setSettings] = useState<Settings | null>(null);

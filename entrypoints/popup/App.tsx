@@ -4,89 +4,28 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
-import { apiKeyItem, hostItem } from "~/storage/settings";
 
 import iconUrl from "~/assets/icon.png";
-
-type Article = {
-	/** article title */
-	title: string;
-
-	/** HTML string of processed article content */
-	content: string;
-
-	/** text content of the article, with all the HTML tags removed */
-	textContent: string;
-
-	/** length of an article, in characters */
-	length: number;
-
-	/** article description, or short excerpt from the content */
-	excerpt: string;
-
-	/** author metadata */
-	byline: string;
-
-	/** content direction */
-	dir: string;
-
-	/** name of the site */
-	siteName: string;
-
-	/** content language */
-	lang: string;
-
-	/** published time */
-	publishedTime: string;
-};
-
-type BookmarkMetadata = {
-	author?: string;
-	published_at?: string;
-	description?: string;
-	sitename?: string;
-
-	image?: string;
-};
-
-type SaveBookmarkRequest = {
-	title: string;
-	url: string;
-	content: string;
-	html: string;
-	description?: string;
-	tags?: string[];
-	metadata?: BookmarkMetadata;
-};
+import {
+	type Article,
+	type SaveBookmarkRequest,
+	saveBookmark,
+} from "~/utils/api";
 
 export default function App() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [currentUrl, setCurrentUrl] = useState("");
-	const [title, setTitle] = useState("");
-	const [author, setAuthor] = useState("");
-	const [published, setPublished] = useState("");
-	const [description, setDescription] = useState("");
 	const [tags, setTags] = useState<string[]>([]);
 	const [newTag, setNewTag] = useState("");
-	const [content, setContent] = useState("");
-	const [settings, setSettings] = useState<{ host: string; apiKey: string }>({
-		host: "",
-		apiKey: "",
-	});
+	const { settings } = useSettings();
 
 	const [article, setArticle] = useState<Article | null>(null);
 	const [markdownContent, setMarkdownContent] = useState<string | null>(null);
 
 	useEffect(() => {
 		initializePopup();
-		// Load settings
-		Promise.all([hostItem.getValue(), apiKeyItem.getValue()]).then(
-			([host, apiKey]) => {
-				setSettings({ host: host || "", apiKey: apiKey || "" });
-			},
-		);
 	}, []);
 
 	// Update dark mode detection to handle changes
@@ -119,7 +58,6 @@ export default function App() {
 
 			// Set initial URL and title
 			setCurrentUrl(tab.url);
-			setTitle(tab.title || "");
 
 			// Process page content
 			const response = await browser.tabs.sendMessage(tab.id, {
@@ -132,15 +70,6 @@ export default function App() {
 
 			setArticle(response.article);
 			setMarkdownContent(response.markdown);
-
-			setContent(response.markdown);
-			setTitle(response.article.title);
-			setDescription(response.article.excerpt);
-			setAuthor(response.article.byline);
-			if (response.article.publishedTime) {
-				const date: Date = new Date(response.article.publishedTime);
-				setPublished(date.toISOString().split("T")[0]);
-			}
 		} catch (error) {
 			setStatus("error");
 			setErrorMessage(
@@ -158,7 +87,7 @@ export default function App() {
 			return;
 		}
 
-		if (!settings.host || !settings.apiKey) {
+		if (!settings || !settings.apiKey) {
 			setStatus("error");
 			setErrorMessage(
 				"Please configure host and API key in extension settings",
@@ -170,29 +99,13 @@ export default function App() {
 		setStatus("idle");
 
 		try {
-			const body: SaveBookmarkRequest = {
-				title: article.title,
+			const request: SaveBookmarkRequest = {
 				url: currentUrl,
-				content: markdownContent || "",
-				html: article.content || "",
-				description: article.excerpt,
+				article: article,
+				markdownContent: markdownContent || "",
 				tags: tags,
-				metadata: {
-					author: article.byline,
-					published_at: article.publishedTime,
-					description: article.excerpt,
-					sitename: article.siteName,
-				},
 			};
-
-			const response = await fetch(`${settings.host}/api/v1/bookmarks`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"X-API-Key": settings.apiKey,
-				},
-				body: JSON.stringify(body),
-			});
+			const response = await saveBookmark(settings, request);
 
 			if (!response.ok) {
 				const errorMessage = await response.text();
@@ -287,8 +200,12 @@ export default function App() {
 								</Label>
 								<Input
 									id="title"
-									value={title}
-									onChange={(e) => setTitle(e.target.value)}
+									value={article?.title || ""}
+									onChange={(e) =>
+										setArticle((article) =>
+											article ? { ...article, title: e.target.value } : null,
+										)
+									}
 									className="mt-0.5 h-7 text-sm dark:bg-gray-800 dark:text-gray-200"
 								/>
 							</div>
@@ -309,8 +226,12 @@ export default function App() {
 								</Label>
 								<Input
 									id="author"
-									value={author}
-									onChange={(e) => setAuthor(e.target.value)}
+									value={article?.byline || ""}
+									onChange={(e) =>
+										setArticle((article) =>
+											article ? { ...article, byline: e.target.value } : null,
+										)
+									}
 									className="mt-0.5 h-7 text-sm dark:bg-gray-800 dark:text-gray-200"
 								/>
 							</div>
@@ -321,8 +242,25 @@ export default function App() {
 								<Input
 									id="published"
 									type="date"
-									value={published}
-									onChange={(e) => setPublished(e.target.value)}
+									value={
+										article?.publishedTime
+											? new Date(article.publishedTime)
+													.toISOString()
+													.split("T")[0]
+											: ""
+									}
+									onChange={(e) =>
+										setArticle((article) =>
+											article
+												? {
+														...article,
+														publishedTime: new Date(
+															e.target.value,
+														).toISOString(),
+													}
+												: null,
+										)
+									}
 									className="mt-0.5 h-7 text-sm dark:bg-gray-800 dark:text-gray-200"
 								/>
 							</div>
@@ -341,8 +279,12 @@ export default function App() {
 								</Label>
 								<Textarea
 									id="description"
-									value={description}
-									onChange={(e) => setDescription(e.target.value)}
+									value={article?.excerpt || ""}
+									onChange={(e) =>
+										setArticle((article) =>
+											article ? { ...article, excerpt: e.target.value } : null,
+										)
+									}
 									className="mt-0.5 text-sm min-h-[60px] dark:bg-gray-800 dark:text-gray-200"
 									rows={2}
 								/>
@@ -351,8 +293,8 @@ export default function App() {
 								<Label className="text-xs">Content Preview</Label>
 								<Textarea
 									id="content"
-									value={content}
-									onChange={(e) => setContent(e.target.value)}
+									value={markdownContent || ""}
+									onChange={(e) => setMarkdownContent(e.target.value)}
 									rows={6}
 									className="mt-0.5 text-sm dark:bg-gray-800 dark:text-gray-200"
 								/>

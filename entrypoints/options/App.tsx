@@ -9,30 +9,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react";
-import { apiKeyItem, hostItem } from "~/storage/settings";
 
 export default function App() {
-	const [host, setHost] = useState("https://recally.io");
-	const [apiKey, setApiKey] = useState("");
+	const { settings, loading, saveSettings } = useSettings();
 	const { toast } = useToast();
 
-	useEffect(() => {
-		// Load saved settings
-		Promise.all([hostItem.getValue(), apiKeyItem.getValue()]).then(
-			([savedHost, savedApiKey]) => {
-				setHost(savedHost || "");
-				setApiKey(savedApiKey || "");
-			},
-		);
-	}, []);
-
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const formData = new FormData(e.currentTarget);
 
 		try {
-			await Promise.all([hostItem.setValue(host), apiKeyItem.setValue(apiKey)]);
-
+			await saveSettings({
+				host: formData.get("host") as string,
+				apiKey: formData.get("apiKey") as string,
+			});
 			toast({
 				title: "Settings saved",
 				description: "Your settings have been saved successfully.",
@@ -45,6 +35,18 @@ export default function App() {
 			});
 		}
 	};
+
+	if (loading || !settings) {
+		return (
+			<div className="container mx-auto py-10">
+				<Card className="max-w-md mx-auto">
+					<CardContent className="py-10">
+						<div className="flex justify-center">Loading settings...</div>
+					</CardContent>
+				</Card>
+			</div>
+		);
+	}
 
 	return (
 		<div className="container mx-auto py-10">
@@ -61,9 +63,9 @@ export default function App() {
 							<Label htmlFor="host">Host URL</Label>
 							<Input
 								id="host"
+								name="host"
 								placeholder="https://recally.io"
-								value={host}
-								onChange={(e) => setHost(e.target.value)}
+								defaultValue={settings.host}
 								required
 							/>
 						</div>
@@ -71,10 +73,10 @@ export default function App() {
 							<Label htmlFor="apiKey">API Key</Label>
 							<Input
 								id="apiKey"
+								name="apiKey"
 								type="password"
 								placeholder="Enter your API key"
-								value={apiKey}
-								onChange={(e) => setApiKey(e.target.value)}
+								defaultValue={settings.apiKey}
 								required
 							/>
 						</div>
