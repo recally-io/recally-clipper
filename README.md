@@ -1,75 +1,51 @@
-# Text Polish - A Chrome Extension 🤖
+# Recally Clipper
 
-A Chrome extension built with WXT and shadcn/ui that helps you polish text with AI capabilities. Simply select any text on a webpage to translate, explain, or copy it with a sleek floating menu.
+A browser extension that seamlessly integrates with [Recally](https://recally.io) to help you save and organize web content. Built with modern technologies including WXT and shadcn/ui.
 
-## ✨ Features
+## Features
 
-- 🔍 Smart text selection detection
-- 🌐 One-click translation to multiple languages
-- 📚 AI-powered text explanation
-- 📋 Quick copy functionality
-- 🎯 Floating UI that follows your selection
-- ⚡ Fast and responsive interactions
-- 🔒 Secure API key management
+- 🚀 Quick web page clipping
+- 💾 Save to Recally with one click
+- 🎨 Clean and intuitive interface
+- 🌐 Support for Chrome, Firefox, and Safari
+- ⚙️ Customizable options
 
-## 🛠️ Tech Stack
+## Screenshots
 
-- **Framework**: React + TypeScript
-- **Extension Framework**: WXT (WebExtension Tools)
-- **UI Components**: shadcn/ui
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **State Management**: React Hooks
-- **API Integration**: OpenAI/Claude API
+<img src="./docs/images/firefox-chrome.png" width="600" alt="Firefox/Chrome" />
+<img src="./docs/images/safari-mac.png" width="600" alt="Safari Mac" />
 
-## 🚀 Getting Started
+<img src="./docs/images/popup-page.png" width="400" alt="Popup Page" />
+<img src="./docs/images/options-page.png" width="400" alt="Options Page" />
 
-1. Clone the repository: `git clone https://github.com/hellokaton/text-polish-chrome-extension.git`
-2. Install dependencies:
+## Installation
 
+### Chrome/Firefox
+1. Visit the extension store
+2. Search for "Recally Clipper"
+3. Click "Add to Browser"
+
+### Safari
+1. Download from the Mac App Store
+2. Enable the extension in Safari preferences
+
+## Development
+
+### Prerequisites
+- bun
+
+### Setup
 ```bash
-pnpm install
+# Install dependencies
+bun install
+
+# Start development server
+bun run dev
+
+# Build for production
+bun run build
 ```
 
-3. Start development server:
+## License
 
-```bash
-pnpm dev
-```
-
-This will automatically:
-
-- Start the development server
-- Open Chrome with the extension loaded
-- Enable hot reload for development
-
-The extension will be automatically reloaded when you make changes to the code.
-
-## 📸 Screenshots
-
-<img src="screenshots/Snipaste_1.jpg" width="500px" />
-<img src="screenshots/Snipaste_2.jpg" width="500px" />
-<img src="screenshots/Snipaste_3.jpg" width="500px" />
-
-## 🔧 Configuration
-
-The extension can be configured through the popup settings panel:
-
-- API endpoint configuration
-- API key management
-- Model selection
-- Target language preference
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [WXT](https://wxt.dev)
-- UI components from [shadcn/ui](https://ui.shadcn.com)
-- Icons from [Lucide](https://lucide.dev)
+MIT License
