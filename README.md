@@ -1,11 +1,11 @@
-# Recally Clipper
+# Recally Clipper · [![License](https://img.shields.io/github/license/recally-io/recally-clipper)](LICENSE)
 
-[![Build Status](https://github.com/recally-io/recally-clipper/workflows/CI/badge.svg)](https://github.com/recally-io/recally-clipper/actions)
-[![Version](https://img.shields.io/github/v/release/recally-io/recally-clipper)](https://github.com/recally-io/recally-clipper/releases)
+[![Latest Release](https://img.shields.io/github/v/release/recally-io/recally-clipper)](https://github.com/recally-io/recally-clipper/releases)
+[![Downloads](https://img.shields.io/github/downloads/recally-io/recally-clipper/total)](https://github.com/recally-io/recally-clipper/releases)
 
-A browser extension that seamlessly integrates with [Recally](https://recally.io) to help you save and organize web content. Built with modern technologies including WXT and shadcn/ui.
+Your intelligent web companion for capturing, organizing, and rediscovering content. The Recally Clipper browser extension integrates seamlessly with [Recally](https://recally.io) to transform how you save and manage web content.
 
-## Features
+## ✨ Key Features
 
 - 🚀 Quick web page clipping
   - Save entire pages
@@ -24,67 +24,99 @@ A browser extension that seamlessly integrates with [Recally](https://recally.io
   - Firefox
   - Safari (manual installation)
 
-## Screenshots
+## 🌐 Universal Browser Support
+| Browser           | Status                          |
+|-------------------|---------------------------------|
+| Chrome/Edge/Brave | [Web Store](https://chrome.google.com/webstore/detail/heblpkdddipfjdpdgikoledoecohoepp)      |
+| Firefox           | [Add-ons](https://addons.mozilla.org/addon/recally-clipper/)        |
+| Safari            | [Manual Install](#safari-setup) |
 
-<img src="./docs/images/firefox-chrome.png" width="600" alt="Firefox/Chrome" />
-<img src="./docs/images/safari-mac.png" width="600" alt="Safari Mac" />
+## 📸 ## Screenshots
 
-<img src="./docs/images/popup-page.png" width="400" alt="Popup Page" />
-<img src="./docs/images/options-page.png" width="400" alt="Options Page" />
+| Browser Interface | Popup Page | Extension Settings |
+|-------------------|-----------------| -----------------|
+| <img src="./docs/images/firefox-chrome.png" width="400" alt="Popup interface showing capture options"> | <img src="./docs/images/popup-page.png" width="400" alt="Chrome/Firefox/Safari"> | <img src="./docs/images/options-page.png" width="400" alt="Extension settings page"> |
 
-## Installation
+## 🚀 Getting Started
 
-### Chrome/Firefox
-1. [Chrome Web Store](https://chrome.google.com/webstore/detail/heblpkdddipfjdpdgikoledoecohoepp)
-2. [Firefox Add-ons](https://addons.mozilla.org/addon/recally-clipper/)
+### Requirements
+- [Recally](https://github.com/recally-io/recally) account
+- Supported browser (Chrome 90+, Firefox 89+, Safari 15+)
 
-### Safari
+### Safari Setup:
+```bash
+# Clone repository
+git clone https://github.com/recally-io/recally-clipper.git
+cd recally-clipper
 
-Currently, the extension is not available on the Safari Extension Gallery. You can install it manually by following these steps:
-- Clone the repository `https://github.com/recally-io/recally-clipper.git`
-- Build for safari `bun run build:safari`
-- Run the extension in Safari by following the instructions [here](https://developer.apple.com/documentation/safariservices/safari_app_extensions/building_a_safari_app_extension)
+# Install dependencies & build
+bun install
+bun run build:safari
 
-## Development
+# Enable extension in Safari:
+# 1. Open Safari Preferences → Extensions
+# 2. Enable "Recally Clipper"
+# 3. Grant requested permissions
+```
+
+## 🛠 Development Guide
 
 ### Prerequisites
-- [bun](https://bun.sh/) (v1.0.0 or higher)
-- Node.js (v18 or higher)
+- [Bun](https://bun.sh) v1.0.0+
+- Node.js v18+
+- Chromium-based browser for testing
 
-### Setup
+### Workflow
 ```bash
 # Install dependencies
 bun install
 
-# Start development server
+# Start dev server with hot-reload
 bun run dev
 
-# Build for production
+# Production build (outputs to dist/)
 bun run build
 
-# Run tests
+# Run Vitest unit tests
 bun test
 
-# Lint code
+# Lint with ESLint
 bun run lint
+
+# Package for store submission
+bun run zip
 ```
 
-## Contributing
+**Loading in Browser:**
+1. After `bun run dev`, open `chrome://extensions`
+2. Enable "Developer mode"
+3. Click "Load unpacked" → select `dist/chrome-mv3`
 
-We welcome contributions! Please follow these steps:
+## 🤝 Contributing
+
+We welcome contributions! Please review our [contribution guidelines](CONTRIBUTING.md) before proceeding.
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch (`git checkout -b feat/your-feature`)
+3. Commit changes following [Conventional Commits](https://www.conventionalcommits.org) spec
+4. Push to branch (`git push origin feat/your-feature`)
+5. Open a Pull Request with detailed description
 
-### Support
+### Issue Tracking
+- 🐛 Bugs: [Open Issue](https://github.com/recally-io/recally-clipper/issues/new?template=bug_report.md)
+- 💡 Feature Requests: [Suggest Idea](https://github.com/recally-io/recally-clipper/issues/new?template=feature_request.md)
 
-For support, please:
-1. Open an issue on GitHub
-2. Contact support@recally.io
+## 📬 Support
 
-## License
+For assistance, contact our team:
+- 🚨 Emergency Support: support@recally.io (response <4hrs)
+- 💬 Community Forum: [Recally Discussions](https://github.com/recally-io/recally/discussions)
+- 🐦 Social Media: [@recally_io](https://twitter.com/recally_io)
 
-MIT License - see the [LICENSE](LICENSE) file for details
+## 📄 License
+
+MIT Licensed - See [LICENSE](LICENSE) for full text.
+
+---
+
+*Recally Clipper v2.1.0 | Documentation updated 2025-01-21*
