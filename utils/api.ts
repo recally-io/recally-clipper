@@ -42,20 +42,21 @@ export type BookmarkMetadata = {
 };
 
 export type Bookmark = {
+	type: string;
 	title: string;
 	url: string;
-	content: string;
-	html: string;
+	content?: string;
+	html?: string;
 	description?: string;
 	tags?: string[];
-	type: string;
 	metadata?: BookmarkMetadata;
 };
 
 export type SaveBookmarkRequest = {
+	type: "image" | "bookmark";
 	url: string;
-	article: Article;
-	markdownContent: string;
+	article?: Article;
+	markdownContent?: string;
 	tags: string[];
 };
 
@@ -63,14 +64,17 @@ export function buildBookmarkFromArticle(
 	request: SaveBookmarkRequest,
 ): Bookmark {
 	const article = request.article;
+	if (!article) {
+		throw new Error("Article is required");
+	}
 	return {
 		title: article.title,
 		url: request.url,
-		content: request.markdownContent,
+		content: request.markdownContent || "",
 		html: article.content || "",
 		description: article.excerpt,
 		tags: request.tags,
-		type: "bookmark",
+		type: request.type,
 		metadata: {
 			author: article.byline,
 			published_at: article.publishedTime,
@@ -83,26 +87,34 @@ export function buildBookmarkFromArticle(
 export async function saveBookmark(
 	settings: Settings,
 	request: SaveBookmarkRequest,
-) {
-	const bookmark = buildBookmarkFromArticle(request);
+): Promise<{ success: boolean }> {
+	const apiUrl = `${settings.host}/api/v1/bookmarks`;
 
-	const response = await fetch(`${settings.host}/api/v1/bookmarks`, {
+	let payload: Bookmark;
+	if (request.type === "image") {
+		payload = {
+			url: request.url,
+			title: `Image ${new Date().toISOString()}`,
+			type: "image",
+			tags: request.tags || [],
+		};
+	} else {
+		// Handle article type
+		payload = buildBookmarkFromArticle(request);
+	}
+
+	const response = await fetch(apiUrl, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${settings.apiKey}`,
 		},
-		body: JSON.stringify(bookmark),
+		body: JSON.stringify(payload),
 	});
 
 	if (!response.ok) {
-		const error = await response
-			.json()
-			.catch(() => ({ message: "Unknown error occurred" }));
-		throw new Error(
-			error.message || `Failed to save bookmark: ${response.statusText}`,
-		);
+		throw new Error(`Failed to save bookmark: ${response.statusText}`);
 	}
 
-	return response.json();
+	return { success: true };
 }

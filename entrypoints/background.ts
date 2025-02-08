@@ -29,6 +29,7 @@ async function handleContextMenuClick(
 		}
 
 		const request: SaveBookmarkRequest = {
+			type: "bookmark",
 			url: tab.url || "",
 			article: response.article,
 			markdownContent: response.markdown,
@@ -61,16 +62,78 @@ async function handleContextMenuClick(
 	}
 }
 
+async function handleImageContextMenuClick(
+	info: browser.Menus.OnClickData,
+	tab?: browser.Tabs.Tab,
+) {
+	if (info.menuItemId !== "save-image-to-recally" || !info.srcUrl) {
+		return;
+	}
+
+	try {
+		const settings = await storage.getItem<Settings>("local:settings");
+		if (!settings?.apiKey || !settings?.host) {
+			console.log("Please configure host and API key in extension settings");
+			throw new Error(
+				"Please configure host and API key in extension settings",
+			);
+		}
+
+		const request: SaveBookmarkRequest = {
+			type: "image",
+			url: info.srcUrl,
+			tags: [],
+		};
+
+		await saveBookmark(settings, request);
+
+		// Notify popup if it's open
+		browser.runtime
+			.sendMessage({
+				type: "bookmark-saved",
+				data: { url: info.srcUrl },
+			})
+			.catch(() => {
+				// Ignore error if popup is not open
+			});
+	} catch (error) {
+		console.error("Error saving image bookmark:", error);
+		browser.runtime
+			.sendMessage({
+				type: "bookmark-error",
+				error:
+					error instanceof Error
+						? error.message
+						: "Failed to save image bookmark",
+			})
+			.catch(() => {
+				// Ignore error if popup is not open
+			});
+	}
+}
+
 export default defineBackground({
 	main() {
-		// Create context menu item
+		// Create context menu items
 		browser.contextMenus.create({
 			id: "save-to-recally",
 			title: "Save to Recally",
 			contexts: ["page", "selection"],
 		});
 
-		// Handle context menu click
-		browser.contextMenus.onClicked.addListener(handleContextMenuClick);
+		browser.contextMenus.create({
+			id: "save-image-to-recally",
+			title: "Save Image to Recally",
+			contexts: ["image"],
+		});
+
+		// Handle context menu clicks
+		browser.contextMenus.onClicked.addListener((info, tab) => {
+			if (info.menuItemId === "save-to-recally") {
+				handleContextMenuClick(info, tab);
+			} else if (info.menuItemId === "save-image-to-recally") {
+				handleImageContextMenuClick(info, tab);
+			}
+		});
 	},
 });
