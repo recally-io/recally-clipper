@@ -59,12 +59,11 @@ export type SaveBookmarkRequest = {
 	tags: string[];
 };
 
-export async function saveBookmark(
-	settings: Settings,
+export function buildBookmarkFromArticle(
 	request: SaveBookmarkRequest,
-) {
+): Bookmark {
 	const article = request.article;
-	const bookmark: Bookmark = {
+	return {
 		title: article.title,
 		url: request.url,
 		content: request.markdownContent,
@@ -79,13 +78,31 @@ export async function saveBookmark(
 			sitename: article.siteName,
 		},
 	};
+}
 
-	return await fetch(`${settings.host}/api/v1/bookmarks`, {
+export async function saveBookmark(
+	settings: Settings,
+	request: SaveBookmarkRequest,
+) {
+	const bookmark = buildBookmarkFromArticle(request);
+
+	const response = await fetch(`${settings.host}/api/v1/bookmarks`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
-			"X-API-Key": settings.apiKey,
+			Authorization: `Bearer ${settings.apiKey}`,
 		},
 		body: JSON.stringify(bookmark),
 	});
+
+	if (!response.ok) {
+		const error = await response
+			.json()
+			.catch(() => ({ message: "Unknown error occurred" }));
+		throw new Error(
+			error.message || `Failed to save bookmark: ${response.statusText}`,
+		);
+	}
+
+	return response.json();
 }

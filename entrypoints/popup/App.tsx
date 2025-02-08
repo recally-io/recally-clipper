@@ -13,13 +13,13 @@ import {
 } from "~/utils/api";
 
 export default function App() {
+	const { settings } = useSettings();
 	const [isLoading, setIsLoading] = useState(false);
 	const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [currentUrl, setCurrentUrl] = useState("");
 	const [tags, setTags] = useState<string[]>([]);
 	const [newTag, setNewTag] = useState("");
-	const { settings } = useSettings();
 
 	const [article, setArticle] = useState<Article | null>(null);
 	const [markdownContent, setMarkdownContent] = useState<string | null>(null);
@@ -81,43 +81,43 @@ export default function App() {
 	};
 
 	const handleSave = async () => {
-		if (!article) {
+		if (!article || !markdownContent) {
 			setStatus("error");
 			setErrorMessage("No content to save");
 			return;
 		}
 
-		if (!settings || !settings.apiKey) {
-			setStatus("error");
-			setErrorMessage(
-				"Please configure host and API key in extension settings",
-			);
-			return;
-		}
-
 		setIsLoading(true);
 		setStatus("idle");
+		setErrorMessage("");
 
 		try {
-			const request: SaveBookmarkRequest = {
-				url: currentUrl,
-				article: article,
-				markdownContent: markdownContent || "",
-				tags: tags,
-			};
-			const response = await saveBookmark(settings, request);
-
-			if (!response.ok) {
-				const errorMessage = await response.text();
-				throw new Error(`Failed to save to Recally: ${errorMessage}`);
+			if (!settings?.apiKey || !settings?.host) {
+				throw new Error(
+					"Please configure host and API key in extension settings",
+				);
 			}
 
+			const request: SaveBookmarkRequest = {
+				url: currentUrl,
+				article,
+				markdownContent,
+				tags,
+			};
+
+			await saveBookmark(settings, request);
 			setStatus("success");
-			// Close the popup window after a short delay
+
+			// Reset form state
+			setTags([]);
+			setNewTag("");
+
+			// Close popup after success (optional)
 			setTimeout(() => {
 				window.close();
-			}, 1000);
+			}, 1500);
 		} catch (error) {
+			console.error("Error saving bookmark:", error);
 			setStatus("error");
 			setErrorMessage(
 				error instanceof Error ? error.message : "Failed to save content",
@@ -126,6 +126,30 @@ export default function App() {
 			setIsLoading(false);
 		}
 	};
+
+	// Listen for messages from background script
+	useEffect(() => {
+		const messageListener = (message: {
+			type: string;
+			error?: string;
+			data?: any;
+		}) => {
+			if (message.type === "bookmark-saved") {
+				setStatus("success");
+				setTimeout(() => {
+					window.close();
+				}, 1500);
+			} else if (message.type === "bookmark-error") {
+				setStatus("error");
+				setErrorMessage(message.error || "Failed to save content");
+			}
+		};
+
+		browser.runtime.onMessage.addListener(messageListener);
+		return () => {
+			browser.runtime.onMessage.removeListener(messageListener);
+		};
+	}, []);
 
 	return (
 		<div className="w-[400px] min-h-[500px] relative dark:bg-gray-900">

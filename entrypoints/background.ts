@@ -1,8 +1,65 @@
 import { defineBackground } from "wxt/sandbox";
 import { storage } from "wxt/storage";
-import iconUrl from "~/assets/icon.png";
 import { type SaveBookmarkRequest, saveBookmark } from "~/utils/api";
 import type { Settings } from "~/utils/types";
+
+async function handleContextMenuClick(
+	info: browser.Menus.OnClickData,
+	tab?: browser.Tabs.Tab,
+) {
+	if (info.menuItemId !== "save-to-recally" || !tab?.id) {
+		return;
+	}
+
+	try {
+		const settings = await storage.getItem<Settings>("local:settings");
+		if (!settings?.apiKey || !settings?.host) {
+			throw new Error(
+				"Please configure host and API key in extension settings",
+			);
+		}
+
+		// Send message to content script to process the page
+		const response = await browser.tabs.sendMessage(tab.id, {
+			type: "process-content",
+		});
+
+		if (!response?.success || !response.article || !response.markdown) {
+			throw new Error("Failed to process page content");
+		}
+
+		const request: SaveBookmarkRequest = {
+			url: tab.url || "",
+			article: response.article,
+			markdownContent: response.markdown,
+			tags: [], // Default empty tags, can be modified later in popup
+		};
+
+		await saveBookmark(settings, request);
+
+		// Notify popup if it's open
+		browser.runtime
+			.sendMessage({
+				type: "bookmark-saved",
+				data: { url: tab.url },
+			})
+			.catch(() => {
+				// Ignore error if popup is not open
+			});
+	} catch (error) {
+		console.error("Error saving bookmark:", error);
+		// Notify popup of error if it's open
+		browser.runtime
+			.sendMessage({
+				type: "bookmark-error",
+				error:
+					error instanceof Error ? error.message : "Failed to save bookmark",
+			})
+			.catch(() => {
+				// Ignore error if popup is not open
+			});
+	}
+}
 
 export default defineBackground({
 	main() {
@@ -14,63 +71,6 @@ export default defineBackground({
 		});
 
 		// Handle context menu click
-		browser.contextMenus.onClicked.addListener(async (info, tab) => {
-			if (info.menuItemId === "save-to-recally" && tab?.id) {
-				try {
-					// Get settings
-					const settings: Settings | null =
-						await storage.getItem("local:settings");
-
-					if (!settings?.apiKey) {
-						throw new Error(
-							"Please configure host and API key in extension settings",
-						);
-					}
-
-					// Send message to content script to process the page
-					const response = await browser.tabs.sendMessage(tab.id, {
-						type: "process-content",
-					});
-
-					if (!response.success) {
-						throw new Error(response.error);
-					}
-
-					// Save bookmark
-					const request: SaveBookmarkRequest = {
-						url: tab.url || "",
-						article: response.article,
-						markdownContent: response.markdown || "",
-						tags: [], // Default to empty tags for context menu
-					};
-					console.log(settings);
-					console.log(request);
-					const saveResponse = await saveBookmark(settings, request);
-					console.log(saveResponse);
-
-					if (!saveResponse.ok) {
-						const errorMessage = await saveResponse.text();
-						throw new Error(`Failed to save to Recally: ${errorMessage}`);
-					}
-
-					// Show success notification
-					await browser.notifications.create({
-						type: "basic",
-						iconUrl: iconUrl,
-						title: "Recally Clipper",
-						message: "Successfully saved to your library!",
-					});
-				} catch (error) {
-					// Show error notification
-					await browser.notifications.create({
-						type: "basic",
-						iconUrl: iconUrl,
-						title: "Recally Clipper",
-						message:
-							error instanceof Error ? error.message : "Failed to save content",
-					});
-				}
-			}
-		});
+		browser.contextMenus.onClicked.addListener(handleContextMenuClick);
 	},
 });
