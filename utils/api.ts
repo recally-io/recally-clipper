@@ -48,6 +48,7 @@ export type Bookmark = {
 	html: string;
 	description?: string;
 	tags?: string[];
+	type: string;
 	metadata?: BookmarkMetadata;
 };
 
@@ -70,6 +71,7 @@ export async function saveBookmark(
 		html: article.content || "",
 		description: article.excerpt,
 		tags: request.tags,
+		type: "bookmark",
 		metadata: {
 			author: article.byline,
 			published_at: article.publishedTime,
