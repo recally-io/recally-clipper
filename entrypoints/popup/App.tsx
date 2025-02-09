@@ -100,6 +100,7 @@ export default function App() {
 
 			const request: SaveBookmarkRequest = {
 				url: currentUrl,
+				type: "bookmark",
 				article,
 				markdownContent,
 				tags,
