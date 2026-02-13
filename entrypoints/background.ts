@@ -248,6 +248,9 @@ async function processTwitterPayload(payload: unknown) {
 
 	const settings = await storage.getItem<Settings>("local:settings");
 	if (!settings?.apiKey || !settings?.host) {
+		// Abort the entire sync — auto-scroll would otherwise keep running
+		// and eventually report a false "complete" status
+		stopTwitterSync("error");
 		safeSendMessage({
 			type: "twitter-sync-error",
 			error: "Please configure host and API key in extension settings",
@@ -322,7 +325,7 @@ function startTwitterSync() {
 	});
 }
 
-function stopTwitterSync() {
+function stopTwitterSync(reason: "manual" | "done" | "error" = "manual") {
 	twitterSync.active = false;
 
 	if (twitterSync.tabId) {
@@ -333,13 +336,26 @@ function stopTwitterSync() {
 			.catch(() => {});
 	}
 
-	safeSendMessage({
-		type: "twitter-sync-complete",
-		data: {
-			count: twitterSync.syncCount,
-			errors: twitterSync.errorCount,
-		},
-	});
+	// Emit different message types so the popup can distinguish
+	// a successful full sync from a user-initiated early stop
+	if (reason === "done") {
+		safeSendMessage({
+			type: "twitter-sync-complete",
+			data: {
+				count: twitterSync.syncCount,
+				errors: twitterSync.errorCount,
+			},
+		});
+	} else if (reason === "manual") {
+		safeSendMessage({
+			type: "twitter-sync-stopped",
+			data: {
+				count: twitterSync.syncCount,
+				errors: twitterSync.errorCount,
+			},
+		});
+	}
+	// reason === "error" — the caller emits twitter-sync-error separately
 }
 
 // ─── Main ────────────────────────────────────────────────────────────
@@ -401,7 +417,7 @@ export default defineBackground({
 
 				case "twitter-auto-scroll-done":
 					// Auto-scroll finished — all bookmarks loaded
-					stopTwitterSync();
+					stopTwitterSync("done");
 					break;
 			}
 		});

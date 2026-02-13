@@ -21,7 +21,7 @@ import {
 	saveBookmark,
 } from "~/utils/api";
 
-type TwitterSyncStatus = "idle" | "syncing" | "complete" | "error";
+type TwitterSyncStatus = "idle" | "syncing" | "complete" | "stopped" | "error";
 
 export default function App() {
 	const { settings } = useSettings();
@@ -190,6 +190,12 @@ export default function App() {
 
 				case "twitter-sync-complete":
 					setTwitterSyncStatus("complete");
+					setTwitterSyncCount((message.data?.count as number) || 0);
+					setTwitterSyncErrors((message.data?.errors as number) || 0);
+					break;
+
+				case "twitter-sync-stopped":
+					setTwitterSyncStatus("stopped");
 					setTwitterSyncCount((message.data?.count as number) || 0);
 					setTwitterSyncErrors((message.data?.errors as number) || 0);
 					break;
@@ -476,6 +482,20 @@ export default function App() {
 							</div>
 						)}
 
+						{twitterSyncStatus === "stopped" && (
+							<div className="flex items-center gap-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded text-xs">
+								<AlertCircle className="h-3.5 w-3.5 text-yellow-600 dark:text-yellow-400" />
+								<span className="text-yellow-700 dark:text-yellow-300">
+									Sync stopped. {twitterSyncCount} bookmarks saved (partial).
+									{twitterSyncErrors > 0 && (
+										<span className="text-red-500 ml-1">
+											({twitterSyncErrors} errors)
+										</span>
+									)}
+								</span>
+							</div>
+						)}
+
 						{twitterSyncStatus === "error" && (
 							<div className="flex items-center gap-2 p-2 bg-red-50 dark:bg-red-900/20 rounded text-xs">
 								<AlertCircle className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
@@ -495,7 +515,8 @@ export default function App() {
 									onClick={handleStartTwitterSync}
 								>
 									<Twitter className="mr-1 h-3 w-3" />
-									{twitterSyncStatus === "complete"
+									{twitterSyncStatus === "complete" ||
+									twitterSyncStatus === "stopped"
 										? "Sync Again"
 										: "Start Sync"}
 								</Button>
