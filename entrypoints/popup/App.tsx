@@ -40,6 +40,7 @@ export default function App() {
 		useState<TwitterSyncStatus>("idle");
 	const [twitterSyncCount, setTwitterSyncCount] = useState(0);
 	const [twitterSyncErrors, setTwitterSyncErrors] = useState(0);
+	const [twitterErrorMessage, setTwitterErrorMessage] = useState("");
 
 	useEffect(() => {
 		initializePopup();
@@ -162,6 +163,7 @@ export default function App() {
 		setTwitterSyncStatus("syncing");
 		setTwitterSyncCount(0);
 		setTwitterSyncErrors(0);
+		setTwitterErrorMessage("");
 		browser.runtime.sendMessage({ type: "start-twitter-sync" });
 	};
 
@@ -209,7 +211,7 @@ export default function App() {
 
 				case "twitter-sync-error":
 					setTwitterSyncStatus("error");
-					setErrorMessage((message.error as string) || "Twitter sync failed");
+					setTwitterErrorMessage((message.error as string) || "Twitter sync failed");
 					break;
 			}
 		};
@@ -499,7 +501,7 @@ export default function App() {
 							<div className="flex items-center gap-2 p-2 bg-red-50 dark:bg-red-900/20 rounded text-xs">
 								<AlertCircle className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
 								<span className="text-red-700 dark:text-red-300">
-									{errorMessage || "Sync failed"}
+									{twitterErrorMessage || "Sync failed"}
 								</span>
 							</div>
 						)}
