@@ -136,6 +136,11 @@ function safeSendMessage(message: Record<string, unknown>) {
 	browser.runtime.sendMessage(message).catch(() => {});
 }
 
+const SAVE_DELAY_MS = 150;
+function delay(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function tweetToArticle(tweet: TwitterTweet): Article {
 	return {
 		title: `@${tweet.screenName}: ${tweet.text.slice(0, 80)}`,
@@ -277,6 +282,8 @@ async function processTwitterPayload(payload: unknown) {
 		try {
 			await saveBookmark(settings, request);
 			twitterSync.syncCount += 1;
+			// Rate limit to avoid overwhelming the API
+			await delay(SAVE_DELAY_MS);
 			safeSendMessage({
 				type: "twitter-sync-progress",
 				data: {
