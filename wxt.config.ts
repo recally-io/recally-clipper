@@ -20,5 +20,11 @@ export default defineConfig({
 		browser_action: {
 			default_popup: "popup.html",
 		},
+		web_accessible_resources: [
+			{
+				resources: ["injected-interceptor.js"],
+				matches: ["https://x.com/i/bookmarks*", "https://twitter.com/i/bookmarks*"],
+			},
+		],
 	},
 });
