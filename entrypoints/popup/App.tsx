@@ -1,4 +1,12 @@
-import { AlertCircle, CheckCircle, Loader2, Settings, X } from "lucide-react";
+import {
+	AlertCircle,
+	CheckCircle,
+	Loader2,
+	Settings,
+	Square,
+	Twitter,
+	X,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -6,11 +14,14 @@ import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 
 import iconUrl from "~/assets/icon.png";
+import { useSettings } from "~/hooks/use-settings";
 import {
 	type Article,
 	type SaveBookmarkRequest,
 	saveBookmark,
 } from "~/utils/api";
+
+type TwitterSyncStatus = "idle" | "syncing" | "complete" | "error";
 
 export default function App() {
 	const { settings } = useSettings();
@@ -23,6 +34,12 @@ export default function App() {
 
 	const [article, setArticle] = useState<Article | null>(null);
 	const [markdownContent, setMarkdownContent] = useState<string | null>(null);
+
+	// Twitter sync state
+	const [twitterSyncStatus, setTwitterSyncStatus] =
+		useState<TwitterSyncStatus>("idle");
+	const [twitterSyncCount, setTwitterSyncCount] = useState(0);
+	const [twitterSyncErrors, setTwitterSyncErrors] = useState(0);
 
 	useEffect(() => {
 		initializePopup();
@@ -78,6 +95,11 @@ export default function App() {
 		} finally {
 			setIsLoading(false);
 		}
+
+		// Request current twitter sync status from background
+		browser.runtime
+			.sendMessage({ type: "get-twitter-sync-status" })
+			.catch(() => {});
 	};
 
 	const handleSave = async () => {
@@ -128,21 +150,62 @@ export default function App() {
 		}
 	};
 
+	// Twitter sync handlers
+	const handleStartTwitterSync = () => {
+		setTwitterSyncStatus("syncing");
+		setTwitterSyncCount(0);
+		setTwitterSyncErrors(0);
+		browser.runtime.sendMessage({ type: "start-twitter-sync" });
+	};
+
+	const handleStopTwitterSync = () => {
+		browser.runtime.sendMessage({ type: "stop-twitter-sync" });
+	};
+
 	// Listen for messages from background script
 	useEffect(() => {
 		const messageListener = (message: {
 			type: string;
 			error?: string;
-			data?: any;
+			data?: Record<string, unknown>;
 		}) => {
-			if (message.type === "bookmark-saved") {
-				setStatus("success");
-				setTimeout(() => {
-					window.close();
-				}, 1500);
-			} else if (message.type === "bookmark-error") {
-				setStatus("error");
-				setErrorMessage(message.error || "Failed to save content");
+			switch (message.type) {
+				case "bookmark-saved":
+					setStatus("success");
+					setTimeout(() => {
+						window.close();
+					}, 1500);
+					break;
+
+				case "bookmark-error":
+					setStatus("error");
+					setErrorMessage(message.error || "Failed to save content");
+					break;
+
+				case "twitter-sync-progress":
+					setTwitterSyncStatus("syncing");
+					setTwitterSyncCount((message.data?.count as number) || 0);
+					setTwitterSyncErrors((message.data?.errors as number) || 0);
+					break;
+
+				case "twitter-sync-complete":
+					setTwitterSyncStatus("complete");
+					setTwitterSyncCount((message.data?.count as number) || 0);
+					setTwitterSyncErrors((message.data?.errors as number) || 0);
+					break;
+
+				case "twitter-sync-error":
+					setTwitterSyncStatus("error");
+					setErrorMessage((message.error as string) || "Twitter sync failed");
+					break;
+
+				case "twitter-sync-status":
+					if (message.data?.active) {
+						setTwitterSyncStatus("syncing");
+						setTwitterSyncCount((message.data?.count as number) || 0);
+						setTwitterSyncErrors((message.data?.errors as number) || 0);
+					}
+					break;
 			}
 		};
 
@@ -370,6 +433,83 @@ export default function App() {
 									</Button>
 								</div>
 							))}
+						</div>
+					</div>
+
+					{/* Twitter Sync Section */}
+					<div className="bg-white dark:bg-gray-800 p-2 rounded-lg border dark:border-gray-700 space-y-2">
+						<h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-1.5">
+							<Twitter className="h-4 w-4" />
+							Twitter Bookmarks Sync
+						</h2>
+						<p className="text-xs text-gray-500 dark:text-gray-400">
+							Sync your Twitter/X bookmarks to Recally. Opens your bookmarks
+							page and auto-scrolls to capture all items.
+						</p>
+
+						{/* Sync status */}
+						{twitterSyncStatus === "syncing" && (
+							<div className="flex items-center gap-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded text-xs">
+								<Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600 dark:text-blue-400" />
+								<span className="text-blue-700 dark:text-blue-300">
+									Syncing... {twitterSyncCount} bookmarks saved
+									{twitterSyncErrors > 0 && (
+										<span className="text-red-500 ml-1">
+											({twitterSyncErrors} errors)
+										</span>
+									)}
+								</span>
+							</div>
+						)}
+
+						{twitterSyncStatus === "complete" && (
+							<div className="flex items-center gap-2 p-2 bg-green-50 dark:bg-green-900/20 rounded text-xs">
+								<CheckCircle className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
+								<span className="text-green-700 dark:text-green-300">
+									Sync complete! {twitterSyncCount} bookmarks saved.
+									{twitterSyncErrors > 0 && (
+										<span className="text-red-500 ml-1">
+											({twitterSyncErrors} errors)
+										</span>
+									)}
+								</span>
+							</div>
+						)}
+
+						{twitterSyncStatus === "error" && (
+							<div className="flex items-center gap-2 p-2 bg-red-50 dark:bg-red-900/20 rounded text-xs">
+								<AlertCircle className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
+								<span className="text-red-700 dark:text-red-300">
+									{errorMessage || "Sync failed"}
+								</span>
+							</div>
+						)}
+
+						{/* Sync buttons */}
+						<div className="flex gap-2">
+							{twitterSyncStatus !== "syncing" ? (
+								<Button
+									variant="outline"
+									size="sm"
+									className="flex-1 h-7 text-xs"
+									onClick={handleStartTwitterSync}
+								>
+									<Twitter className="mr-1 h-3 w-3" />
+									{twitterSyncStatus === "complete"
+										? "Sync Again"
+										: "Start Sync"}
+								</Button>
+							) : (
+								<Button
+									variant="outline"
+									size="sm"
+									className="flex-1 h-7 text-xs text-red-600 border-red-300 hover:bg-red-50 dark:text-red-400 dark:border-red-800 dark:hover:bg-red-900/20"
+									onClick={handleStopTwitterSync}
+								>
+									<Square className="mr-1 h-3 w-3" />
+									Stop Sync
+								</Button>
+							)}
 						</div>
 					</div>
 				</div>
