@@ -3,7 +3,7 @@ import { defineContentScript } from "wxt/sandbox";
 const EVENT_NAME = "RecallyGraphQLResponse";
 
 export default defineContentScript({
-	matches: ["https://x.com/*", "https://twitter.com/*"],
+	matches: ["https://x.com/i/bookmarks*", "https://twitter.com/i/bookmarks*"],
 	runAt: "document_start",
 	main() {
 		// Inject the fetch interceptor into the page's main world

@@ -23,7 +23,7 @@ export default defineConfig({
 		web_accessible_resources: [
 			{
 				resources: ["injected-interceptor.js"],
-				matches: ["https://x.com/*", "https://twitter.com/*"],
+				matches: ["https://x.com/i/bookmarks*", "https://twitter.com/i/bookmarks*"],
 			},
 		],
 	},
