@@ -99,6 +99,13 @@ export default function App() {
 		// Request current twitter sync status from background
 		browser.runtime
 			.sendMessage({ type: "get-twitter-sync-status" })
+			.then((response) => {
+				if (response?.active) {
+					setTwitterSyncStatus("syncing");
+					setTwitterSyncCount((response.count as number) || 0);
+					setTwitterSyncErrors((response.errors as number) || 0);
+				}
+			})
 			.catch(() => {});
 	};
 
@@ -203,14 +210,6 @@ export default function App() {
 				case "twitter-sync-error":
 					setTwitterSyncStatus("error");
 					setErrorMessage((message.error as string) || "Twitter sync failed");
-					break;
-
-				case "twitter-sync-status":
-					if (message.data?.active) {
-						setTwitterSyncStatus("syncing");
-						setTwitterSyncCount((message.data?.count as number) || 0);
-						setTwitterSyncErrors((message.data?.errors as number) || 0);
-					}
 					break;
 			}
 		};

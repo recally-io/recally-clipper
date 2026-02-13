@@ -406,16 +406,12 @@ export default defineBackground({
 					break;
 
 				case "get-twitter-sync-status":
-					// Popup can request the current status on open
-					safeSendMessage({
-						type: "twitter-sync-status",
-						data: {
-							active: twitterSync.active,
-							count: twitterSync.syncCount,
-							errors: twitterSync.errorCount,
-						},
+					// Return status directly via sendResponse (Promise return)
+					return Promise.resolve({
+						active: twitterSync.active,
+						count: twitterSync.syncCount,
+						errors: twitterSync.errorCount,
 					});
-					break;
 
 				case "twitter-graphql-response":
 					processTwitterPayload(message.payload).catch((error) => {
