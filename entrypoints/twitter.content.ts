@@ -2,6 +2,11 @@ import { defineContentScript } from "wxt/sandbox";
 
 const EVENT_NAME = "RecallyGraphQLResponse";
 
+/** Interval between scroll attempts (ms) */
+const SCROLL_INTERVAL_MS = 2000;
+/** Number of consecutive no-new-content checks before considering scroll complete */
+const MAX_NO_CONTENT_CHECKS = 10;
+
 export default defineContentScript({
 	matches: ["https://x.com/i/bookmarks*", "https://twitter.com/i/bookmarks*"],
 	runAt: "document_start",
@@ -62,14 +67,14 @@ function startAutoScroll() {
 		}
 		lastScrollHeight = currentScrollHeight;
 
-		// If no new content after ~10 consecutive checks (20 seconds), we're done
-		if (noNewContentCount >= 10) {
+		// If no new content after consecutive checks, we're done
+		if (noNewContentCount >= MAX_NO_CONTENT_CHECKS) {
 			stopAutoScroll();
 			browser.runtime.sendMessage({
 				type: "twitter-auto-scroll-done",
 			});
 		}
-	}, 2000);
+	}, SCROLL_INTERVAL_MS);
 }
 
 function stopAutoScroll() {

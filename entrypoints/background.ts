@@ -107,6 +107,9 @@ async function handleImageContextMenuClick(
 
 // ─── Twitter sync ────────────────────────────────────────────────────
 
+/** Delay after Twitter page load to let the SPA hydrate before auto-scrolling */
+const SPA_HYDRATION_DELAY_MS = 3000;
+
 interface TwitterTweet {
 	id: string;
 	text: string;
@@ -324,7 +327,7 @@ function startTwitterSync() {
 								})
 								.catch(() => {});
 						}
-					}, 3000);
+					}, SPA_HYDRATION_DELAY_MS);
 				}
 			};
 			browser.tabs.onUpdated.addListener(onUpdated);
