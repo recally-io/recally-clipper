@@ -384,6 +384,14 @@ export default defineBackground({
 			}
 		});
 
+		// Clean up sync state if the Twitter bookmarks tab is closed
+		browser.tabs.onRemoved.addListener((tabId) => {
+			if (tabId === twitterSync.tabId) {
+				stopTwitterSync("manual");
+				twitterSync.tabId = null;
+			}
+		});
+
 		// Handle messages from popup and content scripts
 		browser.runtime.onMessage.addListener((message) => {
 			if (!message?.type) return;
